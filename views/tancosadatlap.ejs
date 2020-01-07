@@ -1,0 +1,112 @@
+<%- include('header') -%>
+<%- include('navbar') -%>
+    <main role="main" class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 col-sm-6">
+                <form class="mb-5"  name="tancos" method="POST" >
+                    <div class="form-group">
+                        <label for="nev">Név</label>
+                        <%if (typeof tancos !== "undefined"){%>
+                            <input type="text" class="form-control" id="nev" name="name" value="<%= tancos.name %>" autofocus required>
+                        <%}else{%>
+                            <input type="text" class="form-control" id="nev" name="name" placeholder="Vezetéknév Keresztnév" autofocus required>
+                        <%}%>
+                    </div>                                                                                               
+                    <div class="form-group">
+                        <label for="sex">Neme</label>
+                        <select class="form-control" name="sex">
+                        <%if(typeof tancos === "undefined"){%>
+                            <option disabled selected>Neme</option>
+                            <option value="fiú">Fiú</option>
+                            <option value="lány">Lány</option>
+                        <%}else if(tancos.sex==="fiú"){%>
+                            <option value="fiú" selected>Fiú</option>
+                            <option value="lány">Lány</option>
+                        <%}else{%>
+                            <option value="fiú">Fiú</option>
+                            <option value="lány" selected>Lány</option>
+                        <%}%>
+                        </select>
+                    </div>
+                    <label>Születési dátum</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <select class="form-control" name='year'>
+                            <%if(typeof tancos === "undefined"){%>
+                                <%for(let i= 2018; i>=1905;i--){%> 
+                                    <%if (i===2018){%><option disabled selected>Év</option><%}%>
+                                    <option value=<%=i%>><%=i%></option>
+                                <%}%>
+                            <%}else{%>
+                                <%for(let i= 2018; i>=1905;i--){%>    
+                                    <%if(i === tancos.year){%>
+                                        <option value=<%=i%> selected><%=i%></option>
+                                    <%}else{%>
+                                        <option value=<%=i%>><%=i%></option>
+                            <%}}}%>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4"> 
+                            <select class="form-control" name="month">
+                            <%let months = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"]; %>
+                            <%if(typeof tancos === "undefined"){%>
+                                <%for(let i=0;i<12;i++){%>
+                                    <%if (i===0){%><option disabled selected>Hónap</option><%}%>
+                                    <option value=<%=i+1%>><%=months[i]%></option>
+                                <%}%>
+                             <%}else{%>
+                                <%for(let i=0;i<12;i++){%>
+                                    <%if((i+1)===tancos.month){%>
+                                        <option value=<%=i+1%> selected><%=months[i]%></option>
+                                    <%}else{%>
+                                        <option value=<%=i+1%>><%=months[i]%></option>
+                            <%}}}%>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">                              
+                            <select class="form-control" name="day">
+                            <%if(typeof tancos === "undefined"){%>
+                                <%for(let i= 1; i<=31;i++){%>
+                                    <%if (i===1){%><option disabled selected>Nap</option><%}%>
+                                    <option value=<%=i%>><%=i%></option>
+                                <%}%>
+                            <%}else{%>
+                                <%for(let i= 1; i<=31;i++){%>
+                                    <%if (i===tancos.day){%>
+                                        <option value=<%=tancos.day%> selected><%=i%></option>
+                                    <%}else{%>
+                                        <option value=<%=i%>><%=i%></option>                                  
+                            <%}}}%>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-outline-success" value="Mentés">
+                </form>
+                <%if (typeof tancos !== "undefined"){%>
+                    <h5>Táncos viseletei</h5>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-striped table-hover table-condense">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Viselet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%viseletLista.forEach( item => {%>
+                                    <%if(tancos._id.equals(item._ownedBy._id)){%>
+                                        <tr class="clickable-row">
+                                            <td><%=item.name%></td>
+                                        </tr>
+                                <%}});%>
+                            </tbody>
+                        </table>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </main>
+    <%- include('footer') -%>
+
+
+
+

@@ -1,0 +1,28 @@
+<%- include('header') -%>
+    <div class="text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">VISELETTÁR</a>
+        </nav>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h2>Bejelentkezés</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    <form class="form-signin" method='POST'>
+                        <div class="form-group">   
+                            <label for="email"></label>
+                            <input type="email" class="form-control" id="email" name='email' placeholder="E-mail cím" required autofocus/>
+                            <label for="password"></label>
+                            <input type="password" class="form-control" id="password" name='password' placeholder="Jelszó" required/>
+                        </div>
+                        <input type='submit' class="btn btn-success" value='Mehet'>
+                    </form>
+                    <a href='/register'>Regisztráció</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('footer') -%>
